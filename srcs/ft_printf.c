@@ -3,41 +3,56 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
+/*   By: ctokoyod <ctokoyod@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 21:51:58 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/02/02 23:23:02 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/02/03 04:08:40 by ctokoyod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-static int	convert_hex(unsigned long long input_nbr, int lower_case)
+static int count_digit_bace(unsigned long long n, int base)
 {
-	char	*hex_type;
-	char	*hex_digits;
+	len = 0;
+	if (n == 0)
+		return (1);
+	while (n)
+	{
+		n = n / base;
+		len++;
+	}
+	return (len);
+}
+
+static int	convert_base(unsigned long long input_nbr, int lower_case, int base)
+{
+	char *base_type;
+	char *base_digits;
+	int size;
 	int		index;
 	int		len;
 
 	if (input_nbr == 0)
 		return (print_char('0'));
 	if (lower_case)
-		hex_type = "0123456789abcdef";
+		base_type = "0123456789abcdef";
 	else
-		hex_type = "0123456789ABCDEF";
-	hex_digits = (char *)malloc(9);
-	if (hex_digits == NULL)
+		base_type = "0123456789ABCDEF";
+	size = count_digit(input_nbr, base);
+	base_digits = (char *)malloc(size + 1);
+	if (base_digits == NULL)
 		return (0);
-	index = 7;
+	index = size - 1;
 	while (input_nbr > 0 && index >= 0)
 	{
-		hex_digits[index] = hex_type[input_nbr % 16];
-		input_nbr /= 16;
+		base_digits[index] = base_type[input_nbr % base];
+		input_nbr /= base;
 		index--;
 	}
-	hex_digits[8] = '\0';
-	len = print_string(&hex_digits[index + 1]);
-	free(hex_digits);
+	base_digits[size] = '\0';
+	len = print_string(&base_digits[index + 1]);
+	free(base_digits);
 	return (len);
 }
 
@@ -59,11 +74,11 @@ static int	process_dispatch(va_list arguments, char specifier)
 	else if (specifier == 'd' || specifier == 'i')
 		return (print_d_i(va_arg(arguments, int)));
 	else if (specifier == 'u')
-		return (print_u(va_arg(arguments, unsigned int)));
+		return (convert_base(va_arg(arguments, unsigned int), 0, 10));
 	else if (specifier == 'x')
-		return (convert_hex(va_arg(arguments, unsigned long long), 1));
+		return (convert_base(va_arg(arguments, unsigned long long), 1, 16));
 	else if (specifier == 'X')
-		return (convert_hex(va_arg(arguments, unsigned long long), 0));
+		return (convert_base(va_arg(arguments, unsigned long long), 0, 16));
 	else if (specifier == 'p')
 		return (convert_pointer(va_arg(arguments, void *)));
 	return (0);
