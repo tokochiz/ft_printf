@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 21:51:58 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/02/01 21:45:57 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/02/01 21:57:03 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,14 @@ static int	convert_hex(unsigned int input_num, int lower_case)
 	if (hex_digits == NULL)
 		return (0);
 	index = 7;
-	word_count = 0;
 	while (input_num > 0 && index >= 0)
 	{
-		// TODO: 16で割った数のインデックスと一致する１６進数の文字タイプを出力する
-		hex_digits[index] = hex_type[input_num % 16];
+		hex_digits[index--] = hex_type[input_num % 16];
 		input_num /= 16;
-		index--;
 	}
 	hex_digits[8] = '\0';
-	word_count = put_string(hex_digits);
+	word_count = put_string(hex_digits[index+1]);
+	free(hex_digits);
 	return (word_count);
 }
 
