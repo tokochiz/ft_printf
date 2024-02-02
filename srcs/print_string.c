@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:41:28 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/02/02 18:15:23 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/02/02 23:22:23 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,42 @@ int	print_string(char *str)
 	return (len);
 }
 
-// int	print_nbr(int)
-// {
+int	print_d_i(int nbr)
+{
+	int		len;
+	char	*str_n;
 
-// }
+	str_n = ft_itoa(nbr);
+	if (str_n == NULL)
+		return (-1);
+	len = count_strlen(str_n);
+	write(1, str_n, len);
+	free(str_n);
+	return (len);
+}
+int	print_u(unsigned int nbr)
+{
+	char *decimal_type;
+	char *decimal_digits;
+	int index;
+	int len;
+
+	if (nbr == 0)
+		return (print_char('0'));
+
+	decimal_type = "0123456789";
+
+	decimal_digits = (char *)malloc(11);
+	if (decimal_digits == NULL)
+		return (0);
+	index = 10;
+	while (nbr > 0 && index >= 0)
+	{
+		decimal_digits[index] = decimal_type[nbr % 10];
+		nbr /= 10;
+		index--;
+	}
+	len = print_string(&decimal_digits[index + 1]);
+	free(decimal_digits);
+	return (len);
+}
