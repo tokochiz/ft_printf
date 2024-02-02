@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_string.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
+/*   By: ctokoyod <ctokoyod@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:41:28 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/02/02 23:22:23 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/02/03 03:47:30 by ctokoyod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,29 +60,33 @@ int	print_d_i(int nbr)
 	free(str_n);
 	return (len);
 }
-int	print_u(unsigned int nbr)
+
+int	print_u(unsigned int nbr, int base)
 {
-	char *decimal_type;
-	char *decimal_digits;
+	char *base_type;
+	char *base_digits;
+	int size;
 	int index;
 	int len;
 
 	if (nbr == 0)
 		return (print_char('0'));
 
-	decimal_type = "0123456789";
-
-	decimal_digits = (char *)malloc(11);
-	if (decimal_digits == NULL)
+	base_type = "0123456789";
+	
+	size = count_digit_base(nbr, base);
+	base_digits = (char *)malloc(size + 1));
+	if (base_digits == NULL)
 		return (0);
-	index = 10;
+	index = size - 1;
 	while (nbr > 0 && index >= 0)
 	{
-		decimal_digits[index] = decimal_type[nbr % 10];
-		nbr /= 10;
+		base_digits[index] = base_type[nbr % base];
+		nbr /= base;
 		index--;
 	}
-	len = print_string(&decimal_digits[index + 1]);
-	free(decimal_digits);
+	base_digits[size] = '\n';
+	len = print_string(&base_digits[index + 1]);
+	free(base_digits);
 	return (len);
 }
