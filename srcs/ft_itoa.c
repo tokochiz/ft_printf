@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
+/*   By: ctokoyod <ctokoyod@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 12:40:59 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/02/02 23:05:21 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/02/03 03:57:24 by ctokoyod         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int	count_digit(unsigned int n)
-{
-	int	len;
+// int	count_digit(unsigned int n)
+// {
+// 	int	len;
 
-	len = 0;
-	if (n == 0)
-		return (1);
-	while (n)
-	{
-		n = n / 10;
-		len++;
-	}
-	return (len);
-}
+// 	len = 0;
+// 	if (n == 0)
+// 		return (1);
+// 	while (n)
+// 	{
+// 		n = n / 10;
+// 		len++;
+// 	}
+// 	return (len);
+// }
 
 void	set_number(unsigned int n, int sign, int n_len, char **n_str)
 {
@@ -56,7 +56,7 @@ char	*ft_itoa(int n)
 	}
 	else
 		un = (unsigned int)n;
-	n_len = count_digit(un);
+	n_len = count_digit_base(un, 10);
 	n_str = (char *)malloc(sizeof(char) * (is_negative + n_len + 1));
 	if (n_str == NULL)
 		return (NULL);
