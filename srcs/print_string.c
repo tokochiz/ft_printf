@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/01 17:41:28 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/02/02 23:22:23 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/02/04 12:36:59 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,29 +60,31 @@ int	print_d_i(int nbr)
 	free(str_n);
 	return (len);
 }
+
 int	print_u(unsigned int nbr)
 {
-	char *decimal_type;
-	char *decimal_digits;
-	int index;
-	int len;
+	char	*decimal_type;
+	char	*decimal_digits;
+	int		index;
+	int		len;
+	int		size;
 
 	if (nbr == 0)
 		return (print_char('0'));
-
 	decimal_type = "0123456789";
-
-	decimal_digits = (char *)malloc(11);
+	size = count_digit_decimal(nbr);
+	decimal_digits = (char *)malloc(size + 1);
 	if (decimal_digits == NULL)
 		return (0);
-	index = 10;
+	index = size - 1;
 	while (nbr > 0 && index >= 0)
 	{
 		decimal_digits[index] = decimal_type[nbr % 10];
 		nbr /= 10;
 		index--;
 	}
-	len = print_string(&decimal_digits[index + 1]);
+	decimal_digits[size] = '\0';
+	len = print_string(decimal_digits);
 	free(decimal_digits);
 	return (len);
 }
