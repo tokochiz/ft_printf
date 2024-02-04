@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 21:51:58 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/02/04 12:42:58 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/02/04 13:09:34 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	process_dispatch(va_list arguments, char specifier)
 	else if (specifier == 'd' || specifier == 'i')
 		return (print_d_i(va_arg(arguments, int)));
 	else if (specifier == 'u')
-		return (print_u(va_arg(arguments, unsigned int)));
+		return (convert_base(va_arg(arguments, unsigned int), 0, 10));
 	else if (specifier == 'x')
 		return (convert_hex(va_arg(arguments, unsigned int), 1));
 	else if (specifier == 'X')
