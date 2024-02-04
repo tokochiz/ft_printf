@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/27 21:51:58 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/02/04 13:09:34 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/02/04 15:17:42 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,14 @@ int	ft_printf(const char *format, ...)
 	va_end(arguments);
 	return (word_count);
 }
+
+// メモリリーク確認用　
+// #include <libc.h>
+
+// __attribute__((destructor))
+// static void destructor() {
+//     system("leaks -q a.out");
+// }
 
 // int	main(void)
 // {
