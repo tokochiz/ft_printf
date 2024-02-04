@@ -6,13 +6,13 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 12:40:59 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/02/02 23:05:21 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/02/03 14:34:28 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-int	count_digit(unsigned int n)
+int	count_digit_decimal(unsigned int n)
 {
 	int	len;
 
@@ -45,7 +45,7 @@ char	*ft_itoa(int n)
 	int				is_negative;
 	int				n_len;
 	char			*n_str;
-	unsigned int un;
+	unsigned int	un;
 
 	is_negative = 0;
 	n_len = 0;
@@ -56,7 +56,7 @@ char	*ft_itoa(int n)
 	}
 	else
 		un = (unsigned int)n;
-	n_len = count_digit(un);
+	n_len = count_digit_decimal(un);
 	n_str = (char *)malloc(sizeof(char) * (is_negative + n_len + 1));
 	if (n_str == NULL)
 		return (NULL);
