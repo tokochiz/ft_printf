@@ -6,7 +6,7 @@
 /*   By:  ctokoyod < ctokoyod@student.42tokyo.jp    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/28 15:42:14 by  ctokoyod         #+#    #+#             */
-/*   Updated: 2024/02/02 23:22:31 by  ctokoyod        ###   ########.fr       */
+/*   Updated: 2024/02/04 12:40:13 by  ctokoyod        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,18 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define INT_MAX 2147483647
-# define INT_MIN -2147483648
-
+int		count_digit_hex(unsigned long long n);
+char	*get_hex_type(int lower_case);
+int		convert_hex(unsigned long long input_nbr, int lower_case);
+int		convert_pointer(void *ptr);
+int		count_digit_decimal(unsigned int n);
+void	set_number(unsigned int n, int sign, int n_len, char **n_str);
 char	*ft_itoa(int n);
-int	print_d_i(int nbr);
-int	print_u(unsigned int nbr);
-int	count_strlen(const char *str);
-int	print_char(char c);
-int	print_string(char *str);
+int		print_d_i(int nbr);
+int		print_u(unsigned int nbr);
+int		count_strlen(const char *str);
+int		print_char(char c);
+int		print_string(char *str);
+int		ft_printf(const char *format, ...);
 
-int	ft_printf(const char *format, ...);
 #endif
